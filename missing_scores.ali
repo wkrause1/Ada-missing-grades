@@ -5,14 +5,18 @@ P ZX
 RN
 RV NO_FLOATING_POINT
 RV NO_IO
+RV NO_DEFAULT_INITIALIZATION
+RV NO_IMPLEMENTATION_ATTRIBUTES
+RV NO_IMPLICIT_LOOPS
 RV SPARK_05
 
-U missing_scores%b	missing_scores.adb	1704e496 NE OO SU IL
+U missing_scores%b	missing_scores.adb	f4c0d44c NE OO SU IL
 W ada%s			ada.ads			ada.ali
 W ada.float_text_io%s	a-flteio.ads		a-flteio.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
 Z ada.tags%s		a-tags.adb		a-tags.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
+Z system.img_int%s	s-imgint.adb		s-imgint.ali
 
 D ada.ads		20180524051735 76789da1 ada%s
 D a-except.ads		20180524051735 291912d5 ada.exceptions%s
@@ -27,11 +31,12 @@ D a-tiinio.ads		20180524051734 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20180524051736 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20180524051734 5ab55268 interfaces%s
 D i-cstrea.ads		20180524051734 e53d8b8e interfaces.c_streams%s
-D missing_scores.adb	20181029184012 88d899c8 missing_scores%b
+D missing_scores.adb	20181029192605 6b1ca912 missing_scores%b
 D system.ads		20180524051735 085b6ffb system%s
 D s-crtl.ads		20180524051734 0ebbdb71 system.crtl%s
 D s-exctab.ads		20180524051736 54135002 system.exception_table%s
 D s-ficobl.ads		20180524051736 078245e4 system.file_control_block%s
+D s-imgint.ads		20180524051734 02dbe0c2 system.img_int%s
 D s-parame.ads		20180524051736 48ec542b system.parameters%s
 D s-secsta.ads		20180524051736 20bbe636 system.secondary_stack%s
 D s-soflin.ads		20180524051735 a7318a92 system.soft_links%s
@@ -49,40 +54,52 @@ X 4 a-inteio.ads
 18K13*Integer_Text_IO[10|46] 14|2w10 2r35
 X 8 a-textio.ads
 49K13*Text_IO 471e16 14|1w10 1r27
+169U14*Skip_Line 14|54s1
+249U14*Get_Line 14|60s1
+263U14*Put_Line 14|44s1 46s1 48s1 61s1
 X 10 a-tiinio.ads
-56U14*Get 14|41s1[4|18] 42s1[4|18] 43s1[4|18] 44s1[4|18] 45s1[4|18] 46s1[4|18]
-. 47s1[4|18] 48s1[4|18]
+56U14*Get 14|43s1[4|18] 45s1[4|18] 47s1[4|18] 49s1[4|18] 50s1[4|18] 51s1[4|18]
+. 52s1[4|18] 53s1[4|18]
 X 14 missing_scores.adb
-5U11*missing_scores 5b11 54l5 54t19
+5U11*missing_scores 5b11 73l5 73t19
 7A6 grades(natural)<integer> 10r19 15r19 20r19
-8R6 program_grades 12e11 31r14 39r38
-9i5 num_grades{natural} 41m14
+8R6 program_grades 12e11 31r14 41r38 65r11
+9i5 num_grades{natural} 43m14 44r19
 10a5 grades_array{7A6}
-11i5 percent_total{natural} 42m14
-13R6 quiz_grades 17e11 32r14 39r67
-14i5 num_grades{natural} 43m13
+11i5 percent_total{natural} 45m14 46r19
+13R6 quiz_grades 17e11 32r14 41r67 66r10
+14i5 num_grades{natural} 47m13 48r18
 15a5 grades_array{7A6}
-16i5 percent_total{natural} 44m13
-18R6 test_grades 22e11 33r14 39r91
-19i5 num_grades{natural} 45m11
+16i5 percent_total{natural} 49m13
+18R6 test_grades 22e11 33r14 41r91 67r8
+19i5 num_grades{natural} 50m11
 20a5 grades_array{7A6}
-21i5 percent_total{natural} 46m11
-23R6 exam_grades 27e11 34r14 39r115
-24i5 num_grades{natural} 47m11
+21i5 percent_total{natural} 51m11
+23R6 exam_grades 27e11 34r14 41r115 68r8
+24i5 num_grades{natural} 52m11
 25i5 exam_grade{natural}
-26i5 percent_total{natural} 48m11
-28R6 student 37e11
-29a5 name{string}
-30i5 letters_in_name{natural}
+26i5 percent_total{natural} 53m11
+28R6 student 37e11 38r40 58r7
+29a5 name{string} 60m15 61r15
+30i5 letters_in_name{natural} 60m26
 31r5 pgrades{8R6}
 32r5 qgrades{13R6}
 33r5 tgrades{18R6}
 34r5 egrades{23R6}
 35f5 overall_average{float}
 36e5 letter_grade{character}
-39U11 make_records 39b11 39<24 39<54 39<80 39<104 49l5 49t17
-39r24 programs{8R6} 41m5 41r5 42m5 42r5
-39r54 quizzes{13R6} 43m5 43r5 44m5 44r5
-39r80 tests{18R6} 45m5 45r5 46m5 46r5
-39r104 exams{23R6} 47m5 47r5 48m5 48r5
+38A6 student_array(28R6)<integer> 57r43 69r12
+41U11 make_records 41b11 41<24 41<54 41<80 41<104 55l5 55t17 71s1
+41r24 programs{8R6} 43m5 43r5 44r10 45m5 45r5 46r10
+41r54 quizzes{13R6} 47m5 47r5 48r10 49m5 49r5
+41r80 tests{18R6} 50m5 50r5 51m5 51r5
+41r104 exams{23R6} 52m5 52r5 53m5 53r5
+57U11 make_students 57b11 57=25 63l5 63t18 72s1
+57a25 stu_array{38A6}
+58r1 temp{28R6} 60m10 60r10 60m21 60r21 61r10
+65r1 programs{8R6} 71m14
+66r1 quizzes{13R6} 71m24
+67r1 tests{18R6} 71m33
+68r1 exams{23R6} 71m40
+69a1 stu_array{38A6} 72m15 72r15
 
