@@ -146,11 +146,8 @@ end computer_letter_grade;
 procedure make_records(programs: out program_grades; quizzes: out quiz_grades; tests: out test_grades; exams: out exam_grades) is
 begin
 get(programs.num_grades);
---put_line(programs.num_grades'img);
 get(programs.percent_total);
---put_line(programs.percent_total'img);
 get(quizzes.num_grades);
---put_line(quizzes.num_grades'img);
 get(quizzes.percent_total);
 get(tests.num_grades);
 get(tests.percent_total);
@@ -169,14 +166,10 @@ stu_count := 0;
 while not end_of_file loop
 counter:=1;
 get_line(temp.name, temp.letters_in_name);
---skip_line;
---put_line(temp.name);
---put_line(temp.letters_in_name'img);
 temp.pgrades:= programs;
 while not end_of_line loop
     get(tempNum);
     temp.pgrades.grades_array(counter) := tempNum;
-    --put(temp.pgrades.grades_array(counter)'img);
     counter := counter + 1;
 end loop;
 skip_line;
@@ -185,7 +178,6 @@ temp.qgrades := quizzes;
 while not end_of_line loop
     get(tempNum);
     temp.qgrades.grades_array(counter) := tempNum;
-    --put(temp.qgrades.grades_array(counter)'img);
     counter:= counter + 1;
 end loop;
 skip_line;
@@ -194,14 +186,12 @@ temp.tgrades:= tests;
 while not end_of_line loop
     get(tempNum);
     temp.tgrades.grades_array(counter) := tempNum;
-    --put(temp.tgrades.grades_array(counter)'img);
     counter:= counter + 1;
 end loop;
 skip_line;
 temp.egrades:= exams;
 get(tempNum);
 temp.egrades.exam_grade:=tempNum;
---put(temp.egrades.exam_grade'img);
 if not end_of_file then
 skip_line;
 end if;
@@ -262,5 +252,3 @@ make_records(programs, quizzes, tests, exams);
 make_students(stu_array, programs, quizzes, tests, exams, stu_count);
 print(stu_array, stu_count);
 end missing_scores;
-
-
