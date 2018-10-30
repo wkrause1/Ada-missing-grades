@@ -55,6 +55,14 @@ function compute_program_average(s: student) return Integer is
     return average;
 end compute_program_average;
 
+function compute_program_points(s:student) return Integer is
+    points: Integer;
+    begin
+    points := Integer(s.paverage * (s.pgrades.percent_total));
+    points := Integer(points / 100);
+    return points;
+end compute_program_points;
+
 function compute_quiz_average(s: student) return Integer is
     sum : Integer:=0;
     average: Integer;
@@ -147,7 +155,7 @@ temp.paverage := compute_program_average(temp);
 temp.qaverage := compute_quiz_average(temp);
 temp.taverage := compute_test_average(temp);
 temp.eaverage := temp.egrades.exam_grade;
-put(temp.eaverage'img);
+temp.ppoints := compute_program_points(temp);
 stu_array(stu_array_index) := temp;
 stu_array_index := stu_array_index + 1;
 end loop;
