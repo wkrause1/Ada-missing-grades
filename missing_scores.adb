@@ -58,7 +58,7 @@ end compute_program_average;
 function compute_program_points(s:student) return Integer is
     points: Integer;
     begin
-    points := Integer(s.paverage * (s.pgrades.percent_total));
+    points := Integer(s.paverage * s.pgrades.percent_total);
     points := Integer(points / 100);
     return points;
 end compute_program_points;
@@ -74,6 +74,14 @@ function compute_quiz_average(s: student) return Integer is
     return average;
 end compute_quiz_average;
 
+function compute_quiz_points(s: student) return Integer is
+    points: Integer;
+    begin
+    points := Integer(s.qaverage * s.qgrades.percent_total);
+    points := Integer(points / 100);
+    return points;
+end compute_quiz_points;
+
 function compute_test_average(s: student) return Integer is
     sum: Integer := 0;
     average: Integer;
@@ -85,9 +93,49 @@ function compute_test_average(s: student) return Integer is
     return average;
 end compute_test_average;
 
+function compute_test_points(s: student) return Integer is
+    points: Integer;
+    begin
+    points := Integer(s.taverage * s.tgrades.percent_total);
+    points := Integer(points / 100);
+    return points;
+end compute_test_points;
+
+function compute_exam_points(s: student) return Integer is
+    points: Integer;
+    begin
+    points:= Integer(s.eaverage * s. egrades.percent_total);
+    points:= Integer(points / 100);
+    return points;
+end compute_exam_points;
+
+procedure fill_in_missing_test_grade(s: in out student) is
+    begin
+    for i in 1..s.tgrades.num_grades loop
+        if s.tgrades.grades_array(i) = 0 then
+            s.tgrades.grades_array(i) := s.eaverage;
+        end if;
+    end loop;
+end fill_in_missing_test_grade;
+
 
 function computer_letter_grade (s: student) return Character is
-begin return 'a';
+    sum : Float;
+    grade: Character;
+    begin
+    sum := Float(s.ppoints + s.qpoints + s.tpoints + s.epoints);
+    if sum >= 90.0 then
+        grade := 'A';
+    elsif sum >= 80.0 then
+        grade := 'B';
+    elsif sum >= 70.0 then
+        grade := 'C';
+    elsif sum >= 60.0 then
+        grade := 'D';
+    else
+        grade := 'F';
+    end if;
+    return grade;
 end computer_letter_grade;
 
 procedure make_records(programs: out program_grades; quizzes: out quiz_grades; tests: out test_grades; exams: out exam_grades) is
@@ -153,9 +201,14 @@ skip_line;
 end if;
 temp.paverage := compute_program_average(temp);
 temp.qaverage := compute_quiz_average(temp);
-temp.taverage := compute_test_average(temp);
 temp.eaverage := temp.egrades.exam_grade;
+fill_in_missing_test_grade(temp);
+temp.taverage := compute_test_average(temp);
 temp.ppoints := compute_program_points(temp);
+temp.qpoints := compute_quiz_points(temp);
+temp.tpoints := compute_test_points(temp);
+temp.epoints := compute_exam_points(temp);
+temp.letter_grade := computer_letter_grade(temp);
 stu_array(stu_array_index) := temp;
 stu_array_index := stu_array_index + 1;
 end loop;
@@ -169,7 +222,7 @@ stu_array: student_array;
 begin
 make_records(programs, quizzes, tests, exams);
 make_students(stu_array, programs, quizzes, tests, exams);
---put(compute_program_average(stu_array(1))'img);
+put(stu_array(3).letter_grade);
 end missing_scores;
 
 

@@ -3,12 +3,13 @@ M P W=b
 P ZX
 
 RN
+RV NO_FLOATING_POINT
 RV NO_IO
 RV NO_DEFAULT_INITIALIZATION
 RV NO_IMPLICIT_LOOPS
 RV SPARK_05
 
-U missing_scores%b	missing_scores.adb	dfd1ba93 NE OO SU IL
+U missing_scores%b	missing_scores.adb	15824a22 NE OO SU IL
 W ada%s			ada.ads			ada.ali
 W ada.float_text_io%s	a-flteio.ads		a-flteio.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
@@ -29,7 +30,7 @@ D a-tiinio.ads		20180524051734 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20180524051736 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20180524051734 5ab55268 interfaces%s
 D i-cstrea.ads		20180524051734 e53d8b8e interfaces.c_streams%s
-D missing_scores.adb	20181030215900 400dc7cd missing_scores%b
+D missing_scores.adb	20181030222658 8a5e377c missing_scores%b
 D system.ads		20180524051735 085b6ffb system%s
 D s-crtl.ads		20180524051734 0ebbdb71 system.crtl%s
 D s-exctab.ads		20180524051736 54135002 system.exception_table%s
@@ -51,93 +52,110 @@ X 4 a-inteio.ads
 18K13*Integer_Text_IO[10|46] 14|2w10 2r35
 X 8 a-textio.ads
 49K13*Text_IO 471e16 14|1w10 1r27
-169U14*Skip_Line 14|106s1 128s1 137s1 146s1 152s1
-172V13*End_Of_Line{boolean} 14|122s11 131s11 140s11
-184V13*End_Of_File{boolean} 14|115s11 151s8
-249U14*Get_Line 14|117s1
+169U14*Skip_Line 14|154s1 176s1 185s1 194s1 200s1
+172V13*End_Of_Line{boolean} 14|170s11 179s11 188s11
+184V13*End_Of_File{boolean} 14|163s11 199s8
+208U14*Put 14|225s1
+249U14*Get_Line 14|165s1
 X 10 a-tiinio.ads
-56U14*Get 14|95s1[4|18] 97s1[4|18] 99s1[4|18] 101s1[4|18] 102s1[4|18] 103s1[4|18]
-. 104s1[4|18] 105s1[4|18] 123s5[4|18] 132s5[4|18] 141s5[4|18] 148s1[4|18]
-66U14*Put 14|159s1[4|18]
+56U14*Get 14|143s1[4|18] 145s1[4|18] 147s1[4|18] 149s1[4|18] 150s1[4|18]
+. 151s1[4|18] 152s1[4|18] 153s1[4|18] 171s5[4|18] 180s5[4|18] 189s5[4|18]
+. 196s1[4|18]
 X 14 missing_scores.adb
-5U11*missing_scores 5b11 174l5 174t19
+5U11*missing_scores 5b11 226l5 226t19
 7A6 grades(natural)<integer> 10r19 15r19 20r19
-8R6 program_grades 12e11 31r14 93r38 109r68 165r11
-9i5 num_grades{natural} 51r27 54r30 95m14
-10a5 grades_array{7A6} 52r32 124m18
-11i5 percent_total{natural} 61r47 97m14
-13R6 quiz_grades 17e11 34r14 93r67 109r93 166r10
-14i5 num_grades{natural} 70r27 73r30 99m13
-15a5 grades_array{7A6} 71r32 133m18
-16i5 percent_total{natural} 101m13
-18R6 test_grades 22e11 37r14 93r91 109r113 167r8
-19i5 num_grades{natural} 81r27 84r30 102m11
-20a5 grades_array{7A6} 82r32 142m18
-21i5 percent_total{natural} 103m11
-23R6 exam_grades 27e11 40r14 93r115 109r133 168r8
-24i5 num_grades{natural} 104m11
-25i5 exam_grade{natural} 149m14 157r31
-26i5 percent_total{natural} 105m11
-28R6 student 45e11 46r40 47r37 58r35 66r34 77r34 89r36 110r7
-29a5 name{string} 117m15
-30i5 letters_in_name{natural} 117m26
-31r5 pgrades{8R6} 51r19 52r24 54r22 61r39 121m6 124m10
-32i5 paverage{integer} 61r25 154m6
-33i5 ppoints{integer} 158m6 159r10
-34r5 qgrades{13R6} 70r19 71r24 73r22 130m6 133m10
-35i5 qaverage{integer} 155m6
-36i5 qpoints{integer}
-37r5 tgrades{18R6} 81r19 82r24 84r22 139m6 142m10
-38i5 taverage{integer} 156m6
-39i5 tpoints{integer}
-40r5 egrades{23R6} 147m6 149m6 157r23
-41i5 epoints{integer}
-42i5 eaverage{integer} 157m6
+8R6 program_grades 12e11 31r14 141r38 157r68 217r11
+9i5 num_grades{natural} 51r27 54r30 143m14
+10a5 grades_array{7A6} 52r32 172m18
+11i5 percent_total{natural} 61r46 145m14
+13R6 quiz_grades 17e11 34r14 141r67 157r93 218r10
+14i5 num_grades{natural} 70r27 73r30 147m13
+15a5 grades_array{7A6} 71r32 181m18
+16i5 percent_total{natural} 80r46 149m13
+18R6 test_grades 22e11 37r14 141r91 157r113 219r8
+19i5 num_grades{natural} 89r27 92r30 114r27 150m11
+20a5 grades_array{7A6} 90r32 115r22 116m23 190m18
+21i5 percent_total{natural} 99r46 151m11
+23R6 exam_grades 27e11 40r14 141r115 157r133 220r8
+24i5 num_grades{natural} 152m11
+25i5 exam_grade{natural} 197m14 204r31
+26i5 percent_total{natural} 107r46 153m11
+28R6 student 45e11 46r40 47r37 58r35 66r34 77r33 85r34 96r33 104r33 112r48
+. 122r36 158r7
+29a5 name{string} 165m15
+30i5 letters_in_name{natural} 165m26
+31r5 pgrades{8R6} 51r19 52r24 54r22 61r38 169m6 172m10
+32i5 paverage{integer} 61r25 202m6
+33i5 ppoints{integer} 126r20 207m6
+34r5 qgrades{13R6} 70r19 71r24 73r22 80r38 178m6 181m10
+35i5 qaverage{integer} 80r25 203m6
+36i5 qpoints{integer} 126r32 208m6
+37r5 tgrades{18R6} 89r19 90r24 92r22 99r38 114r19 115r14 116m15 187m6 190m10
+38i5 taverage{integer} 99r25 206m6
+39i5 tpoints{integer} 126r44 209m6
+40r5 egrades{23R6} 107r38 195m6 197m6 204r23
+41i5 epoints{integer} 126r56 210m6
+42i5 eaverage{integer} 107r24 116r44 204m6
 43i5 overall_average{integer}
-44e5 letter_grade{character}
-46A6 student_array(28R6)<integer> 109r43 169r12
-47V10 compute_program_average{integer} 47b10 47>34 56l5 56t28 154s18
+44e5 letter_grade{character} 211m6 225r18
+46A6 student_array(28R6)<integer> 157r43 221r12
+47V10 compute_program_average{integer} 47b10 47>34 56l5 56t28 202s18
 47r34 s{28R6} 51r17 52r22 54r20
 48i5 sum{integer} 52m9 52r16 54r16
 49i5 average{integer} 54m5 55r12
 51i9 i{integer} 52r45
-58V10 compute_program_points{integer} 58b10 58>33 64l5 64t27 158s17
-58r33 s{28R6} 61r23 61r37
+58V10 compute_program_points{integer} 58b10 58>33 64l5 64t27 207s17
+58r33 s{28R6} 61r23 61r36
 59i5 points{integer} 61m5 62m5 62r23 63r12
-66V10 compute_quiz_average{integer} 66b10 66>31 75l5 75t25 155s18
+66V10 compute_quiz_average{integer} 66b10 66>31 75l5 75t25 203s18
 66r31 s{28R6} 70r17 71r22 73r20
 67i5 sum{integer} 71m9 71r16 73r16
 68i5 average{integer} 73m5 74r12
 70i9 i{integer} 71r45
-77V10 compute_test_average{integer} 77b10 77>31 86l5 86t25 156s18
-77r31 s{28R6} 81r17 82r22 84r20
-78i5 sum{integer} 82m9 82r16 84r16
-79i5 average{integer} 84m5 85r12
-81i9 i{integer} 82r45
-89V10 computer_letter_grade{character} 89b10 89>33 91l5 91t26
-89r33 s{28R6}
-93U11 make_records 93b11 93<24 93<54 93<80 93<104 107l5 107t17 171s1
-93r24 programs{8R6} 95m5 95r5 97m5 97r5
-93r54 quizzes{13R6} 99m5 99r5 101m5 101r5
-93r80 tests{18R6} 102m5 102r5 103m5 103r5
-93r104 exams{23R6} 104m5 104r5 105m5 105r5
-109U11 make_students 109b11 109=25 109>58 109>84 109>106 109>126 163l5 163t18
-. 172s1
-109a25 stu_array{46A6} 160m1
-109r58 programs{8R6} 121r16
-109r84 quizzes{13R6} 130r17
-109r106 tests{18R6} 139r16
-109r126 exams{23R6} 147r16
-110r1 temp{28R6} 117m10 117r10 117m21 117r21 121m1 124m5 130m1 133m5 139m1
-. 142m5 147m1 149m1 154m1 154r42 155m1 155r39 156m1 156r39 157m1 157r18 158m1
-. 158r40 159r5 160r31
-111i1 stu_array_index{natural} 160r11 161m1 161r20
-112i1 counter{integer} 116m1 124r31 126m5 126r16 129m1 133r31 135m5 135r15
-. 138m1 142r31 144m5 144r15
-113i1 tempNum{integer} 123m9 124r43 132m9 133r43 141m9 142r43 148m5 149r26
-165r1 programs{8R6} 171m14 172r26
-166r1 quizzes{13R6} 171m24 172r36
-167r1 tests{18R6} 171m33 172r45
-168r1 exams{23R6} 171m40 172r52
-169a1 stu_array{46A6} 172m15 172r15
+77V10 compute_quiz_points{integer} 77b10 77>30 83l5 83t24 208s17
+77r30 s{28R6} 80r23 80r36
+78i5 points{integer} 80m5 81m5 81r23 82r12
+85V10 compute_test_average{integer} 85b10 85>31 94l5 94t25 206s18
+85r31 s{28R6} 89r17 90r22 92r20
+86i5 sum{integer} 90m9 90r16 92r16
+87i5 average{integer} 92m5 93r12
+89i9 i{integer} 90r45
+96V10 compute_test_points{integer} 96b10 96>30 102l5 102t24 209s17
+96r30 s{28R6} 99r23 99r36
+97i5 points{integer} 99m5 100m5 100r23 101r12
+104V10 compute_exam_points{integer} 104b10 104>30 110l5 110t24 210s17
+104r30 s{28R6} 107r22 107r35
+105i5 points{integer} 107m5 108m5 108r22 109r12
+112U11 fill_in_missing_test_grade 112b11 112=38 119l5 119t31 205s1
+112r38 s{28R6} 114r17 115r12 116m13 116r42
+114i9 i{integer} 115r35 116r36
+122V10 computer_letter_grade{character} 122b10 122>33 139l5 139t26 211s22
+122r33 s{28R6} 126r18 126r30 126r42 126r54
+123f5 sum{float} 126m5 127r8 129r11 131r11 133r11
+124e5 grade{character} 128m9 130m9 132m9 134m9 136m9 138r12
+141U11 make_records 141b11 141<24 141<54 141<80 141<104 155l5 155t17 223s1
+141r24 programs{8R6} 143m5 143r5 145m5 145r5
+141r54 quizzes{13R6} 147m5 147r5 149m5 149r5
+141r80 tests{18R6} 150m5 150r5 151m5 151r5
+141r104 exams{23R6} 152m5 152r5 153m5 153r5
+157U11 make_students 157b11 157=25 157>58 157>84 157>106 157>126 215l5 215t18
+. 224s1
+157a25 stu_array{46A6} 212m1
+157r58 programs{8R6} 169r16
+157r84 quizzes{13R6} 178r17
+157r106 tests{18R6} 187r16
+157r126 exams{23R6} 195r16
+158r1 temp{28R6} 165m10 165r10 165m21 165r21 169m1 172m5 178m1 181m5 187m1
+. 190m5 195m1 197m1 202m1 202r42 203m1 203r39 204m1 204r18 205m28 205r28
+. 206m1 206r39 207m1 207r40 208m1 208r37 209m1 209r37 210m1 210r37 211m1
+. 211r44 212r31
+159i1 stu_array_index{natural} 212r11 213m1 213r20
+160i1 counter{integer} 164m1 172r31 174m5 174r16 177m1 181r31 183m5 183r15
+. 186m1 190r31 192m5 192r15
+161i1 tempNum{integer} 171m9 172r43 180m9 181r43 189m9 190r43 196m5 197r26
+217r1 programs{8R6} 223m14 224r26
+218r1 quizzes{13R6} 223m24 224r36
+219r1 tests{18R6} 223m33 224r45
+220r1 exams{23R6} 223m40 224r52
+221a1 stu_array{46A6} 224m15 224r15 225r5
 
