@@ -29,14 +29,58 @@ type student is record
     name: String(1..40);
     letters_in_name: Natural;
     pgrades: program_grades;
+    paverage: Integer;
+    ppoints: Integer;
     qgrades: quiz_grades;
+    qaverage: Integer;
+    qpoints: Integer;
     tgrades: test_grades;
+    taverage: Integer;
+    tpoints: Integer;
     egrades: exam_grades;
-    overall_average: float;
+    epoints: Integer;
+    eaverage: Integer;
+    overall_average: Integer;
     letter_grade: Character;
 end record;
 type student_array is array(1..100) of student;
+function compute_program_average(s: student) return Integer is
+    sum: Integer:=0;
+    average: Integer;
+    begin
+    for i in 1..s.pgrades.num_grades loop
+        sum := sum + s.pgrades.grades_array(i);
+    end loop;
+    average := sum/s.pgrades.num_grades;
+    return average;
+end compute_program_average;
 
+function compute_quiz_average(s: student) return Integer is
+    sum : Integer:=0;
+    average: Integer;
+    begin
+    for i in 1..s.qgrades.num_grades loop
+        sum := sum + s.qgrades.grades_array(i);
+    end loop;
+    average := sum/s.qgrades.num_grades;
+    return average;
+end compute_quiz_average;
+
+function compute_test_average(s: student) return Integer is
+    sum: Integer := 0;
+    average: Integer;
+    begin
+    for i in 1..s.tgrades.num_grades loop
+        sum := sum + s.tgrades.grades_array(i);
+    end loop;
+    average := sum/s.tgrades.num_grades;
+    return average;
+end compute_test_average;
+
+
+function computer_letter_grade (s: student) return Character is
+begin return 'a';
+end computer_letter_grade;
 
 procedure make_records(programs: out program_grades; quizzes: out quiz_grades; tests: out test_grades; exams: out exam_grades) is
 begin
@@ -99,6 +143,11 @@ temp.egrades.exam_grade:=tempNum;
 if not end_of_file then
 skip_line;
 end if;
+temp.paverage := compute_program_average(temp);
+temp.qaverage := compute_quiz_average(temp);
+temp.taverage := compute_test_average(temp);
+temp.eaverage := temp.egrades.exam_grade;
+put(temp.eaverage'img);
 stu_array(stu_array_index) := temp;
 stu_array_index := stu_array_index + 1;
 end loop;
@@ -112,7 +161,7 @@ stu_array: student_array;
 begin
 make_records(programs, quizzes, tests, exams);
 make_students(stu_array, programs, quizzes, tests, exams);
---put(stu_array(4).name);
+--put(compute_program_average(stu_array(1))'img);
 end missing_scores;
 
 
