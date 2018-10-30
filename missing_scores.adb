@@ -241,6 +241,21 @@ for i in 1..stu_count loop
 end loop;
 end print;
 
+procedure insertion_sort(s: in out student_array; stu_count: Integer) is
+    val : student;
+    j: natural;
+begin
+    for i in 1 + 1..stu_count loop
+        val := s(i);
+        j := i-1;
+        while j >= 1 and then s(j).overall_average < val.overall_average loop
+            s(j+1) := s(j);
+            j := j-1;
+        end loop;
+        s(j+1) := val;
+    end loop;
+end insertion_sort;
+
 programs: program_grades;
 quizzes: quiz_grades;
 tests: test_grades;
@@ -250,5 +265,6 @@ stu_count: Integer;
 begin
 make_records(programs, quizzes, tests, exams);
 make_students(stu_array, programs, quizzes, tests, exams, stu_count);
+insertion_sort(stu_array, stu_count);
 print(stu_array, stu_count);
 end missing_scores;

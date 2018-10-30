@@ -10,7 +10,7 @@ RV NO_IMPLEMENTATION_ATTRIBUTES
 RV NO_IMPLICIT_LOOPS
 RV SPARK_05
 
-U missing_scores%b	missing_scores.adb	268f5671 NE OO SU IL
+U missing_scores%b	missing_scores.adb	fb860233 NE OO SU IL
 W ada%s			ada.ads			ada.ali
 W ada.float_text_io%s	a-flteio.ads		a-flteio.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
@@ -34,7 +34,7 @@ D a-tiinio.ads		20180524051734 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20180524051736 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20180524051734 5ab55268 interfaces%s
 D i-cstrea.ads		20180524051734 e53d8b8e interfaces.c_streams%s
-D missing_scores.adb	20181030230956 b9532b2f missing_scores%b
+D missing_scores.adb	20181030232506 645a7f6d missing_scores%b
 D system.ads		20180524051735 085b6ffb system%s
 D s-conca2.ads		20180524051735 02a0d7d0 system.concat_2%s
 D s-conca7.ads		20180524051734 fcc75b1f system.concat_7%s
@@ -71,26 +71,26 @@ X 10 a-tiinio.ads
 . 153s1[4|18] 154s1[4|18] 155s1[4|18] 171s5[4|18] 179s5[4|18] 187s5[4|18]
 . 193s1[4|18]
 X 14 missing_scores.adb
-5U11*missing_scores 5b11 254l5 254t19
+5U11*missing_scores 5b11 270l5 270t19
 7A6 grades(natural)<integer> 10r19 15r19 20r19
-8R6 program_grades 12e11 31r14 146r38 159r68 244r11
+8R6 program_grades 12e11 31r14 146r38 159r68 259r11
 9i5 num_grades{natural} 51r27 54r30 148m14 223r30
 10a5 grades_array{7A6} 52r32 172m18 224r26
 11i5 percent_total{natural} 61r46 149m14 222r46
-13R6 quiz_grades 17e11 34r14 146r67 159r93 245r10
+13R6 quiz_grades 17e11 34r14 146r67 159r93 260r10
 14i5 num_grades{natural} 70r27 73r30 150m13 228r30
 15a5 grades_array{7A6} 71r32 180m18 229r26
 16i5 percent_total{natural} 80r46 151m13 227r46
-18R6 test_grades 22e11 37r14 146r91 159r113 246r8
+18R6 test_grades 22e11 37r14 146r91 159r113 261r8
 19i5 num_grades{natural} 89r27 92r30 121r27 152m11 233r30
 20a5 grades_array{7A6} 90r32 122r22 123m23 188m18 234r26
 21i5 percent_total{natural} 99r46 153m11 232r46
-23R6 exam_grades 27e11 40r14 146r115 159r133 247r8
+23R6 exam_grades 27e11 40r14 146r115 159r133 262r8
 24i5 num_grades{natural} 154m11
 25i5 exam_grade{natural} 194m14 200r31 238r22
 26i5 percent_total{natural} 107r46 155m11 237r46
 28R6 student 45e11 46r40 47r37 58r35 66r34 77r33 85r34 96r33 104r33 112r36
-. 119r48 129r36 160r7
+. 119r48 129r36 160r7 245r11
 29a5 name{string} 168m15 218r30
 30i5 letters_in_name{natural} 168m26 218r43
 31r5 pgrades{8R6} 51r19 52r24 54r22 61r38 169m6 172m10 222r38 223r22 224r18
@@ -106,9 +106,10 @@ X 14 missing_scores.adb
 40r5 egrades{23R6} 107r38 192m6 194m6 200r23 237r38 238r14
 41i5 epoints{integer} 115r50 206m6 237r110
 42i5 eaverage{integer} 107r24 123r44 200m6 237r81
-43i5 overall_average{integer} 132r10 134r13 136r13 138r13 207m6 219r41
+43i5 overall_average{integer} 132r10 134r13 136r13 138r13 207m6 219r41 251r36
+. 251r58
 44e5 letter_grade{character} 208m6 220r38
-46A6 student_array(28R6)<integer> 159r43 215r20 248r12
+46A6 student_array(28R6)<integer> 159r43 215r20 244r36 263r12
 47V10 compute_program_average{integer} 47b10 47>34 56l5 56t28 198s18
 47r34 s{28R6} 51r17 52r22 54r20
 48i5 sum{integer} 52m9 52r16 54r16
@@ -145,13 +146,13 @@ X 14 missing_scores.adb
 129V10 computer_letter_grade{character} 129b10 129>33 144l5 144t26 208s22
 129r33 s{28R6} 132r8 134r11 136r11 138r11
 130e5 grade{character} 133m9 135m9 137m9 139m9 141m9 143r12
-146U11 make_records 146b11 146<24 146<54 146<80 146<104 157l5 157t17 251s1
+146U11 make_records 146b11 146<24 146<54 146<80 146<104 157l5 157t17 266s1
 146r24 programs{8R6} 148m5 148r5 149m5 149r5
 146r54 quizzes{13R6} 150m5 150r5 151m5 151r5
 146r80 tests{18R6} 152m5 152r5 153m5 153r5
 146r104 exams{23R6} 154m5 154r5 155m5 155r5
 159U11 make_students 159b11 159=25 159>58 159>84 159>106 159>126 159<146
-. 213l5 213t18 252s1
+. 213l5 213t18 267s1
 159a25 stu_array{46A6} 209m1
 159r58 programs{8R6} 169r16
 159r84 quizzes{13R6} 177r17
@@ -166,7 +167,7 @@ X 14 missing_scores.adb
 162i1 counter{integer} 167m1 172r31 173m5 173r16 176m1 180r31 181m5 181r15
 . 184m1 188r31 189m5 189r15
 163i1 tempNum{integer} 171m9 172r43 179m9 180r43 187m9 188r43 193m5 194r26
-215U11 print 215b11 215>17 215>35 242l5 242t10 253s1
+215U11 print 215b11 215>17 215>35 242l5 242t10 269s1
 215a17 s{46A6} 218r25 218r38 219r36 220r33 222r33 222r76 222r105 223r17 224r13
 . 227r33 227r76 227r105 228r17 229r13 232r33 232r76 232r105 233r17 234r13
 . 237r33 237r76 237r105 238r9
@@ -177,10 +178,16 @@ X 14 missing_scores.adb
 223i9 j{integer} 224r39
 228i9 j{integer} 229r39
 233i9 j{integer} 234r39
-244r1 programs{8R6} 251m14 252r26
-245r1 quizzes{13R6} 251m24 252r36
-246r1 tests{18R6} 251m33 252r45
-247r1 exams{23R6} 251m40 252r52
-248a1 stu_array{46A6} 252m15 252r15 253r7
-249i1 stu_count{integer} 252m59 253r18
+244U11 insertion_sort 244b11 244=26 244>51 257l5 257t19 268s1
+244a26 s{46A6} 249r16 251r31 252m13 252r23 255m9
+244i51 stu_count{integer} 248r21
+245r5 val{28R6} 249m9 251r54 255r19
+246i5 j{natural} 250m9 251r15 251r33 252r15 252r25 253m13 253r18 255r11
+248i9 i{integer} 249r18 250r14
+259r1 programs{8R6} 266m14 267r26
+260r1 quizzes{13R6} 266m24 267r36
+261r1 tests{18R6} 266m33 267r45
+262r1 exams{23R6} 266m40 267r52
+263a1 stu_array{46A6} 267m15 267r15 268m16 268r16 269r7
+264i1 stu_count{integer} 267m59 268r27 269r18
 
