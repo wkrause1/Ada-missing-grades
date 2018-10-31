@@ -156,42 +156,64 @@ get(exams.percent_total);
 skip_line;
 end make_records;
 
+procedure get_program_grades(s: in out student)  is
+tempNum: Integer;
+counter: Integer := 1;
+begin
+while not end_of_line loop
+    get(tempNum);
+    s.pgrades.grades_array(counter) := tempNum;
+    counter := counter + 1;
+end loop;
+end get_program_grades;
+
+procedure get_quiz_grades(s: in out student) is
+tempNum: Integer;
+counter: Integer := 1;
+begin
+while not end_of_line loop
+    get(tempNum);
+    s.qgrades.grades_array(counter) := tempNum;
+    counter := counter + 1;
+end loop;
+end get_quiz_grades;
+
+procedure get_test_grades(s: in out student) is
+tempNum: Integer;
+counter: Integer := 1;
+begin
+while not end_of_line loop
+    get(tempNum);
+    s.tgrades.grades_array(counter) := tempNum;
+    counter := counter + 1;
+end loop;
+end get_test_grades;
+
+procedure get_exam_grades(s: in out student) is
+tempNum: Integer;
+begin
+get(tempNum);
+s.egrades.exam_grade:= tempNum;
+end get_exam_grades;
+
 procedure make_students(stu_array: in out student_array; programs: program_grades; quizzes: quiz_grades; tests: test_grades; exams: exam_grades; stu_count: out Integer) is
 temp: student;
 stu_array_index: Natural:=1;
-counter: Integer;
-tempNum: Integer;
 begin
 stu_count := 0;
 while not end_of_file loop
-counter:=1;
 get_line(temp.name, temp.letters_in_name);
 temp.pgrades:= programs;
-while not end_of_line loop
-    get(tempNum);
-    temp.pgrades.grades_array(counter) := tempNum;
-    counter := counter + 1;
-end loop;
+get_program_grades(temp);
 skip_line;
-counter := 1;
 temp.qgrades := quizzes;
-while not end_of_line loop
-    get(tempNum);
-    temp.qgrades.grades_array(counter) := tempNum;
-    counter:= counter + 1;
-end loop;
+get_quiz_grades(temp);
 skip_line;
-counter := 1;
 temp.tgrades:= tests;
-while not end_of_line loop
-    get(tempNum);
-    temp.tgrades.grades_array(counter) := tempNum;
-    counter:= counter + 1;
-end loop;
+get_test_grades(temp);
 skip_line;
 temp.egrades:= exams;
-get(tempNum);
-temp.egrades.exam_grade:=tempNum;
+get_exam_grades(temp);
 if not end_of_file then
 skip_line;
 end if;
