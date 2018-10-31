@@ -11,7 +11,7 @@ RV NO_IMPLEMENTATION_ATTRIBUTES
 RV NO_IMPLICIT_LOOPS
 RV SPARK_05
 
-U missing_scores%b	missing_scores.adb	d44d10d3 NE OO SU IL
+U missing_scores%b	missing_scores.adb	500f119c NE OO SU IL
 W ada%s			ada.ads			ada.ali
 W ada.float_text_io%s	a-flteio.ads		a-flteio.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
@@ -36,7 +36,7 @@ D a-tiinio.ads		20180524051734 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20180524051736 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20180524051734 5ab55268 interfaces%s
 D i-cstrea.ads		20180524051734 e53d8b8e interfaces.c_streams%s
-D missing_scores.adb	20181031063145 4b916d8d missing_scores%b
+D missing_scores.adb	20181031164102 cfd36cc2 missing_scores%b
 D system.ads		20180524051735 085b6ffb system%s
 D s-conca2.ads		20180524051735 02a0d7d0 system.concat_2%s
 D s-crtl.ads		20180524051734 0ebbdb71 system.crtl%s
@@ -79,8 +79,8 @@ X 10 a-tiinio.ads
 X 14 missing_scores.adb
 9U11*missing_scores 9b11 372l5 372t19
 10i1 zero{integer} 252r32 284r21 296r21 310r21 321r17
-11i1 missing_grade{integer} 67r41 88r41 109r41 111r39 222r33 249r35 281r48
-. 293r48 305r48 318r39
+11i1 missing_grade{integer} 18r39 24r39 30r39 67r41 88r41 109r41 111r39 222r33
+. 249r35 281r48 293r48 305r48 318r39
 12E6 let_grade 12e30 56r19 152r52 153r12
 12n20 A{12E6} 156r18
 12n22 B{12E6} 158r18
@@ -217,7 +217,7 @@ X 14 missing_scores.adb
 332i9 i{integer} 333r18 334r14
 347U11 bubble_sort 347b11 347=23 347>48 359l5 359t16
 347a23 s{59A6} 352r16 352r36 353r24 354m17 354r25 355m17
-347i48 stu_count{integer} 350r25
+347i48 stu_count{integer} 350r17
 348r5 val{40R6} 353m17 355r25
 350i9 i{integer} 351r21 352r18 354r27 355r19
 351i13 j{integer} 352r38 353r26 354r19

@@ -15,19 +15,19 @@ type grades is array( 1..77 ) of grade;
 
 type program_grades is record
     num_grades: Natural;
-    grades_array: grades:= (others => 101);
+    grades_array: grades:= (others => missing_grade);
     percent_total: Natural;
 end record;
 
 type quiz_grades is record
     num_grades: Natural;
-    grades_array: grades:= (others => 101);
+    grades_array: grades:= (others => missing_grade);
     percent_total: Natural;
 end record;
 
 type test_grades is record
     num_grades: Natural;
-    grades_array: grades:= (others => 101);
+    grades_array: grades:= (others => missing_grade);
     percent_total: Natural;
 end record;
 
@@ -268,7 +268,7 @@ procedure print(s: student_array; stu_count: Integer) is
 begin
     for i in 1..stu_count loop
         put_line("Name: " & s(i).name(1..s(i).letters_in_name));
-        put("Overall Average: ");
+        put("Overall Average:");
         put(s(i).overall_average,3,1,0);
         new_line;
         put_line("Letter Grade: " & s(i).letter_grade'img);
@@ -347,7 +347,7 @@ end insertion_sort;
 procedure bubble_sort(s: in out student_array; stu_count: Integer) is
     val: student;
 begin
-    for i in reverse 1..stu_count loop
+    for i in 1..stu_count loop
         for j in 1..i loop
             if s(i).letter_grade < s(j).letter_grade then
                 val := s(j);
