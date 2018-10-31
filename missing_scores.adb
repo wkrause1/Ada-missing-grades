@@ -4,24 +4,26 @@ with Ada.Float_Text_IO; use Ada.Float_Text_IO;
 
 procedure missing_scores is
 
-type grades is array( 1..77 ) of Natural;
-type student_array is array(1..100) of student;
+subtype grade is Natural range 0..101;
+type grades is array( 1..77 ) of grade;
+
+zero: constant Integer:= 0;
 
 type program_grades is record
     num_grades: Natural;
-    grades_array: grades:= (others => 0);
+    grades_array: grades:= (others => 101);
     percent_total: Natural;
 end record;
 
 type quiz_grades is record
     num_grades: Natural;
-    grades_array: grades:= (others => 0);
+    grades_array: grades:= (others => 101);
     percent_total: Natural;
 end record;
 
 type test_grades is record
     num_grades: Natural;
-    grades_array: grades:= (others => 0);
+    grades_array: grades:= (others => 101);
     percent_total: Natural;
 end record;
 
@@ -50,12 +52,17 @@ type student is record
     letter_grade: Character;
 end record;
 
+type student_array is array( 1..100 ) of student;
+
+
 function compute_program_average(s: student) return Integer is
     sum: Integer:=0;
     average: Integer;
     begin
     for i in 1..s.pgrades.num_grades loop
-        sum := sum + s.pgrades.grades_array(i);
+        if s.pgrades.grades_array(i) /= 101 then
+            sum := sum + s.pgrades.grades_array(i);
+        end if;
     end loop;
     average := sum/s.pgrades.num_grades;
     return average;
@@ -125,7 +132,7 @@ end compute_overall_average;
 procedure fill_in_missing_test_grade(s: in out student) is
     begin
     for i in 1..s.tgrades.num_grades loop
-        if s.tgrades.grades_array(i) = 0 then
+        if s.tgrades.grades_array(i) = 101 then
             s.tgrades.grades_array(i) := s.eaverage;
         end if;
     end loop;
@@ -249,21 +256,37 @@ begin
         put_line("Category          Weight  Average  Points   Grades ...");
         put("Programs           " & s(i).pgrades.percent_total'img &"      " & s(i).paverage'img &"     " & s(i).ppoints'img & "    ");
         for j in 1..s(i).pgrades.num_grades loop
-            put(s(i).pgrades.grades_array(j)'img);
+            if s(i).pgrades.grades_array(j) /= 101 then
+                put(s(i).pgrades.grades_array(j)'img);
+            else
+                put(zero'img&"'");
+            end if;
         end loop;
         new_line;
         put("Quizzes            " & s(i).qgrades.percent_total'img &"      " & s(i).qaverage'img &"     " & s(i).qpoints'img & "    ");
         for j in 1..s(i).qgrades.num_grades loop
-            put(s(i).qgrades.grades_array(j)'img);
+            if s(i).qgrades.grades_array(j) /= 101 then
+                put(s(i).qgrades.grades_array(j)'img);
+            else
+                put(zero'img & "'");
+            end if;
         end loop;
         new_line;
         put("Tests              " & s(i).tgrades.percent_total'img &"      " & s(i).taverage'img &"     " & s(i).tpoints'img & "    ");
         for j in 1..s(i).tgrades.num_grades loop
-            put(s(i).tgrades.grades_array(j)'img);
+            if s(i).tgrades.grades_array(j) /= 101 then
+                put(s(i).tgrades.grades_array(j)'img);
+            else
+                put(zero'img & "'");
+            end if;
         end loop;
         new_line;
         put("Final Exam         " & s(i).egrades.percent_total'img &"      " & s(i).eaverage'img &"     " & s(i).epoints'img & "    ");
-        put(s(i).egrades.exam_grade'img);
+        if s(i).egrades.exam_grade /= 101 then
+            put(s(i).egrades.exam_grade'img);
+        else
+            put(zero'img & "'");
+        end if;
         new_line;
         new_line;
     end loop;
