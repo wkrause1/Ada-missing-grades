@@ -2,6 +2,10 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with Ada.Float_Text_IO; use Ada.Float_Text_IO;
 
+--@author Will Krause
+--@version 2018-10-31
+--@email wkrause1@radford.edu
+--@row-col 0,3
 procedure missing_scores is
 zero: constant Integer:= 0;
 missing_grade: constant Integer := 101;
