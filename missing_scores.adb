@@ -3,11 +3,11 @@ with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with Ada.Float_Text_IO; use Ada.Float_Text_IO;
 
 procedure missing_scores is
+zero: constant Integer:= 0;
+missing_grade: constant Integer := 101;
 
 subtype grade is Natural range 0..101;
 type grades is array( 1..77 ) of grade;
-
-zero: constant Integer:= 0;
 
 type program_grades is record
     num_grades: Natural;
@@ -60,7 +60,7 @@ function compute_program_average(s: student) return Integer is
     average: Integer;
     begin
     for i in 1..s.pgrades.num_grades loop
-        if s.pgrades.grades_array(i) /= 101 then
+        if s.pgrades.grades_array(i) /= missing_grade then
             sum := sum + s.pgrades.grades_array(i);
         end if;
     end loop;
@@ -81,7 +81,9 @@ function compute_quiz_average(s: student) return Integer is
     average: Integer;
     begin
     for i in 1..s.qgrades.num_grades loop
-        sum := sum + s.qgrades.grades_array(i);
+        if s.qgrades.grades_array(i) /= missing_grade then
+            sum := sum + s.qgrades.grades_array(i);
+        end if;
     end loop;
     average := sum/s.qgrades.num_grades;
     return average;
@@ -100,7 +102,11 @@ function compute_test_average(s: student) return Integer is
     average: Integer;
     begin
     for i in 1..s.tgrades.num_grades loop
-        sum := sum + s.tgrades.grades_array(i);
+        if s.tgrades.grades_array(i) /= missing_grade then
+            sum := sum + s.tgrades.grades_array(i);
+        else
+            sum := sum + s.egrades.exam_grade;
+        end if;
     end loop;
     average := sum/s.tgrades.num_grades;
     return average;
@@ -233,7 +239,6 @@ begin
     temp.paverage := compute_program_average(temp);
     temp.qaverage := compute_quiz_average(temp);
     temp.eaverage := temp.egrades.exam_grade;
-    fill_in_missing_test_grade(temp);
     temp.taverage := compute_test_average(temp);
     temp.ppoints := compute_program_points(temp);
     temp.qpoints := compute_quiz_points(temp);
@@ -256,7 +261,7 @@ begin
         put_line("Category          Weight  Average  Points   Grades ...");
         put("Programs           " & s(i).pgrades.percent_total'img &"      " & s(i).paverage'img &"     " & s(i).ppoints'img & "    ");
         for j in 1..s(i).pgrades.num_grades loop
-            if s(i).pgrades.grades_array(j) /= 101 then
+            if s(i).pgrades.grades_array(j) /= missing_grade then
                 put(s(i).pgrades.grades_array(j)'img);
             else
                 put(zero'img&"'");
@@ -265,7 +270,7 @@ begin
         new_line;
         put("Quizzes            " & s(i).qgrades.percent_total'img &"      " & s(i).qaverage'img &"     " & s(i).qpoints'img & "    ");
         for j in 1..s(i).qgrades.num_grades loop
-            if s(i).qgrades.grades_array(j) /= 101 then
+            if s(i).qgrades.grades_array(j) /= missing_grade then
                 put(s(i).qgrades.grades_array(j)'img);
             else
                 put(zero'img & "'");
@@ -274,15 +279,15 @@ begin
         new_line;
         put("Tests              " & s(i).tgrades.percent_total'img &"      " & s(i).taverage'img &"     " & s(i).tpoints'img & "    ");
         for j in 1..s(i).tgrades.num_grades loop
-            if s(i).tgrades.grades_array(j) /= 101 then
+            if s(i).tgrades.grades_array(j) /= missing_grade then
                 put(s(i).tgrades.grades_array(j)'img);
             else
-                put(zero'img & "'");
+                put(s(i).egrades.exam_grade'img & "'");
             end if;
         end loop;
         new_line;
         put("Final Exam         " & s(i).egrades.percent_total'img &"      " & s(i).eaverage'img &"     " & s(i).epoints'img & "    ");
-        if s(i).egrades.exam_grade /= 101 then
+        if s(i).egrades.exam_grade /= missing_grade then
             put(s(i).egrades.exam_grade'img);
         else
             put(zero'img & "'");
@@ -299,13 +304,30 @@ begin
     for i in 1 + 1..stu_count loop
         val := s(i);
         j := i-1;
-        while j >= 1 and then s(j).overall_average < val.overall_average loop
+        while j >= 1 and then s(j).letter_grade > val.letter_grade loop
             s(j+1) := s(j);
             j := j-1;
         end loop;
         s(j+1) := val;
     end loop;
 end insertion_sort;
+
+
+--Didn't implement bubble sort. While technically stable, it did not sort correctly
+
+procedure bubble_sort(s: in out student_array; stu_count: Integer) is
+    val: student;
+begin
+    for i in reverse 1..stu_count loop
+        for j in 1..i loop
+            if s(i).letter_grade < s(j).letter_grade then
+                val := s(j);
+                s(j) := s(i);
+                s(i) := val;
+            end if;
+        end loop;
+    end loop;
+end bubble_sort;
 
 programs: program_grades;
 quizzes: quiz_grades;
