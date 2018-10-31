@@ -104,7 +104,7 @@ function compute_test_average(s: student) return Integer is
     for i in 1..s.tgrades.num_grades loop
         if s.tgrades.grades_array(i) /= missing_grade then
             sum := sum + s.tgrades.grades_array(i);
-        else
+        elsif s.egrades.exam_grade /= missing_grade then
             sum := sum + s.egrades.exam_grade;
         end if;
     end loop;
@@ -211,8 +211,12 @@ end get_test_grades;
 procedure get_exam_grades(s: in out student) is
     tempNum: Integer;
 begin
-    get(tempNum);
-    s.egrades.exam_grade:= tempNum;
+    if not end_of_line then
+        get(tempNum);
+        s.egrades.exam_grade:= tempNum;
+    else
+        s.egrades.exam_grade := missing_grade;
+    end if;
 end get_exam_grades;
 
 procedure make_students(stu_array: in out student_array; programs: program_grades; quizzes: quiz_grades; tests: test_grades; exams: exam_grades; stu_count: out Integer) is
@@ -238,7 +242,11 @@ begin
     end if;
     temp.paverage := compute_program_average(temp);
     temp.qaverage := compute_quiz_average(temp);
-    temp.eaverage := temp.egrades.exam_grade;
+    if temp.egrades.exam_grade /= missing_grade then
+        temp.eaverage := temp.egrades.exam_grade;
+    else
+        temp.eaverage := zero;
+    end if;
     temp.taverage := compute_test_average(temp);
     temp.ppoints := compute_program_points(temp);
     temp.qpoints := compute_quiz_points(temp);
@@ -281,8 +289,10 @@ begin
         for j in 1..s(i).tgrades.num_grades loop
             if s(i).tgrades.grades_array(j) /= missing_grade then
                 put(s(i).tgrades.grades_array(j)'img);
-            else
+            elsif s(i).egrades.exam_grade /= 101 then
                 put(s(i).egrades.exam_grade'img & "'");
+            else
+                put(zero'img & "'");
             end if;
         end loop;
         new_line;
