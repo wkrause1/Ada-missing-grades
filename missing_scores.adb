@@ -166,7 +166,8 @@ function computer_letter_grade (s: student) return let_grade is
     return grade;
 end computer_letter_grade;
 
-procedure make_records(programs: out program_grades; quizzes: out quiz_grades; tests: out test_grades; exams: out exam_grades) is
+procedure make_records(programs: out program_grades; quizzes: out quiz_grades; 
+                        tests: out test_grades; exams: out exam_grades) is
 begin
     get(programs.num_grades);
     get(programs.percent_total);
@@ -223,7 +224,8 @@ begin
     end if;
 end get_exam_grades;
 
-procedure make_students(stu_array: in out student_array; programs: program_grades; quizzes: quiz_grades; tests: test_grades; exams: exam_grades; stu_count: out Integer) is
+procedure make_students(stu_array: in out student_array; programs: program_grades; quizzes: quiz_grades; 
+                        tests: test_grades; exams: exam_grades; stu_count: out Integer) is
     temp: student;
     stu_array_index: Natural:=1;
 begin
