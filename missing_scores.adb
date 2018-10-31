@@ -37,99 +37,99 @@ type student is record
     name: String(1..40);
     letters_in_name: Natural;
     pgrades: program_grades;
-    paverage: Integer;
-    ppoints: Integer;
+    paverage: Float;
+    ppoints: Float;
     qgrades: quiz_grades;
-    qaverage: Integer;
-    qpoints: Integer;
+    qaverage: Float;
+    qpoints: Float;
     tgrades: test_grades;
-    taverage: Integer;
-    tpoints: Integer;
+    taverage: Float;
+    tpoints: Float;
     egrades: exam_grades;
-    epoints: Integer;
-    eaverage: Integer;
-    overall_average: Integer;
+    epoints: Float;
+    eaverage: Float;
+    overall_average: Float;
     letter_grade: let_grade;
 end record;
 
 type student_array is array( 1..100 ) of student;
 
 
-function compute_program_average(s: student) return Integer is
-    sum: Integer:=0;
-    average: Integer;
+function compute_program_average(s: student) return Float is
+    sum: Float:=0.0;
+    average: Float;
     begin
     for i in 1..s.pgrades.num_grades loop
         if s.pgrades.grades_array(i) /= missing_grade then
-            sum := sum + s.pgrades.grades_array(i);
+            sum := sum + Float(s.pgrades.grades_array(i));
         end if;
     end loop;
-    average := sum/s.pgrades.num_grades;
+    average := sum/ Float(s.pgrades.num_grades);
     return average;
 end compute_program_average;
 
-function compute_program_points(s:student) return Integer is
-    points: Integer;
+function compute_program_points(s:student) return Float is
+    points: Float;
     begin
-    points := Integer(s.paverage * s.pgrades.percent_total);
-    points := Integer(points / 100);
+    points := s.paverage * Float(s.pgrades.percent_total);
+    points := points / Float(100);
     return points;
 end compute_program_points;
 
-function compute_quiz_average(s: student) return Integer is
-    sum : Integer:=0;
-    average: Integer;
+function compute_quiz_average(s: student) return Float is
+    sum : Float:=0.0;
+    average: Float;
     begin
     for i in 1..s.qgrades.num_grades loop
         if s.qgrades.grades_array(i) /= missing_grade then
-            sum := sum + s.qgrades.grades_array(i);
+            sum := sum + Float(s.qgrades.grades_array(i));
         end if;
     end loop;
-    average := sum/s.qgrades.num_grades;
+    average := sum/Float(s.qgrades.num_grades);
     return average;
 end compute_quiz_average;
 
-function compute_quiz_points(s: student) return Integer is
-    points: Integer;
+function compute_quiz_points(s: student) return Float is
+    points: Float;
     begin
-    points := Integer(s.qaverage * s.qgrades.percent_total);
-    points := Integer(points / 100);
+    points := s.qaverage * Float(s.qgrades.percent_total);
+    points := points / Float(100);
     return points;
 end compute_quiz_points;
 
-function compute_test_average(s: student) return Integer is
-    sum: Integer := 0;
-    average: Integer;
+function compute_test_average(s: student) return Float is
+    sum: Float:= 0.0;
+    average: Float;
     begin
     for i in 1..s.tgrades.num_grades loop
         if s.tgrades.grades_array(i) /= missing_grade then
-            sum := sum + s.tgrades.grades_array(i);
+            sum := sum + Float(s.tgrades.grades_array(i));
         elsif s.egrades.exam_grade /= missing_grade then
-            sum := sum + s.egrades.exam_grade;
+            sum := sum + Float(s.egrades.exam_grade);
         end if;
     end loop;
-    average := sum/s.tgrades.num_grades;
+    average := sum/Float(s.tgrades.num_grades);
     return average;
 end compute_test_average;
 
-function compute_test_points(s: student) return Integer is
-    points: Integer;
+function compute_test_points(s: student) return Float is
+    points: Float;
     begin
-    points := Integer(s.taverage * s.tgrades.percent_total);
-    points := Integer(points / 100);
+    points := s.taverage * Float(s.tgrades.percent_total);
+    points := points / Float(100);
     return points;
 end compute_test_points;
 
-function compute_exam_points(s: student) return Integer is
-    points: Integer;
+function compute_exam_points(s: student) return Float is
+    points: Float;
     begin
-    points:= Integer(s.eaverage * s. egrades.percent_total);
-    points:= Integer(points / 100);
+    points:= s.eaverage * Float(s.egrades.percent_total);
+    points:= points / Float(100);
     return points;
 end compute_exam_points;
 
-function compute_overall_average(s:student) return Integer is
-    sum: Integer;
+function compute_overall_average(s:student) return Float is
+    sum: Float;
     begin
     sum := s.ppoints + s.qpoints + s.tpoints + s.epoints;
     return sum;
@@ -139,7 +139,7 @@ procedure fill_in_missing_test_grade(s: in out student) is
     begin
     for i in 1..s.tgrades.num_grades loop
         if s.tgrades.grades_array(i) = 101 then
-            s.tgrades.grades_array(i) := s.eaverage;
+            s.tgrades.grades_array(i) := Integer(s.eaverage);
         end if;
     end loop;
 end fill_in_missing_test_grade;
@@ -148,13 +148,13 @@ end fill_in_missing_test_grade;
 function computer_letter_grade (s: student) return let_grade is
     grade: let_grade;
     begin
-    if s.overall_average >= 90 then
+    if s.overall_average >= 90.0 then
         grade := A;
-    elsif s.overall_average >= 80 then
+    elsif s.overall_average >= 80.0 then
         grade := B;
-    elsif s.overall_average >= 70 then
+    elsif s.overall_average >= 70.0 then
         grade := C;
-    elsif s.overall_average >= 60 then
+    elsif s.overall_average >= 60.0 then
         grade := D;
     else
         grade := F;
@@ -243,9 +243,9 @@ begin
     temp.paverage := compute_program_average(temp);
     temp.qaverage := compute_quiz_average(temp);
     if temp.egrades.exam_grade /= missing_grade then
-        temp.eaverage := temp.egrades.exam_grade;
+        temp.eaverage := Float(temp.egrades.exam_grade);
     else
-        temp.eaverage := zero;
+        temp.eaverage := Float(zero);
     end if;
     temp.taverage := compute_test_average(temp);
     temp.ppoints := compute_program_points(temp);
@@ -264,10 +264,15 @@ procedure print(s: student_array; stu_count: Integer) is
 begin
     for i in 1..stu_count loop
         put_line("Name: " & s(i).name(1..s(i).letters_in_name));
-        put_line("Overall Average: " & s(i).overall_average'img);
+        put("Overall Average: ");
+        put(s(i).overall_average,3,1,0);
+        new_line;
         put_line("Letter Grade: " & s(i).letter_grade'img);
         put_line("Category          Weight  Average  Points   Grades ...");
-        put("Programs           " & s(i).pgrades.percent_total'img &"      " & s(i).paverage'img &"     " & s(i).ppoints'img & "    ");
+        put("Programs           " & s(i).pgrades.percent_total'img);
+        put(s(i).paverage,8,1,0); 
+        put(s(i).ppoints,6,1,0);
+        put("   ");
         for j in 1..s(i).pgrades.num_grades loop
             if s(i).pgrades.grades_array(j) /= missing_grade then
                 put(s(i).pgrades.grades_array(j)'img);
@@ -276,7 +281,10 @@ begin
             end if;
         end loop;
         new_line;
-        put("Quizzes            " & s(i).qgrades.percent_total'img &"      " & s(i).qaverage'img &"     " & s(i).qpoints'img & "    ");
+        put("Quizzes            " & s(i).qgrades.percent_total'img);
+        put(s(i).qaverage,8,1,0); 
+        put(s(i).qpoints,6,1,0);
+        put("   ");
         for j in 1..s(i).qgrades.num_grades loop
             if s(i).qgrades.grades_array(j) /= missing_grade then
                 put(s(i).qgrades.grades_array(j)'img);
@@ -285,7 +293,10 @@ begin
             end if;
         end loop;
         new_line;
-        put("Tests              " & s(i).tgrades.percent_total'img &"      " & s(i).taverage'img &"     " & s(i).tpoints'img & "    ");
+        put("Tests              " & s(i).tgrades.percent_total'img);
+        put(s(i).taverage,8,1,0); 
+        put(s(i).tpoints,6,1,0);
+        put("   ");
         for j in 1..s(i).tgrades.num_grades loop
             if s(i).tgrades.grades_array(j) /= missing_grade then
                 put(s(i).tgrades.grades_array(j)'img);
@@ -296,7 +307,10 @@ begin
             end if;
         end loop;
         new_line;
-        put("Final Exam         " & s(i).egrades.percent_total'img &"      " & s(i).eaverage'img &"     " & s(i).epoints'img & "    ");
+        put("Final Exam         " & s(i).egrades.percent_total'img);
+        put(s(i).eaverage,8,1,0); 
+        put(s(i).epoints,6,1,0);
+        put("   ");
         if s(i).egrades.exam_grade /= missing_grade then
             put(s(i).egrades.exam_grade'img);
         else
@@ -324,6 +338,7 @@ end insertion_sort;
 
 
 --Didn't implement bubble sort. While technically stable, it did not sort correctly
+--Perhaps because of my implementation of it
 
 procedure bubble_sort(s: in out student_array; stu_count: Integer) is
     val: student;
