@@ -34,7 +34,7 @@ D a-tiinio.ads		20180524051734 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20180524051736 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20180524051734 5ab55268 interfaces%s
 D i-cstrea.ads		20180524051734 e53d8b8e interfaces.c_streams%s
-D missing_scores.adb	20181031003020 218289d1 missing_scores%b
+D missing_scores.adb	20181031012214 218289d1 missing_scores%b
 D system.ads		20180524051735 085b6ffb system%s
 D s-conca2.ads		20180524051735 02a0d7d0 system.concat_2%s
 D s-conca7.ads		20180524051734 fcc75b1f system.concat_7%s

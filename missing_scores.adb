@@ -5,26 +5,32 @@ with Ada.Float_Text_IO; use Ada.Float_Text_IO;
 procedure missing_scores is
 
 type grades is array( 1..77 ) of Natural;
+type student_array is array(1..100) of student;
+
 type program_grades is record
     num_grades: Natural;
     grades_array: grades:= (others => 0);
     percent_total: Natural;
 end record;
+
 type quiz_grades is record
     num_grades: Natural;
     grades_array: grades:= (others => 0);
     percent_total: Natural;
 end record;
+
 type test_grades is record
     num_grades: Natural;
     grades_array: grades:= (others => 0);
     percent_total: Natural;
 end record;
+
 type exam_grades is record
     num_grades: Natural := 1;
     exam_grade: Natural;
     percent_total: Natural;
 end record;
+
 type student is record
     name: String(1..40);
     letters_in_name: Natural;
@@ -43,7 +49,7 @@ type student is record
     overall_average: Integer;
     letter_grade: Character;
 end record;
-type student_array is array(1..100) of student;
+
 function compute_program_average(s: student) return Integer is
     sum: Integer:=0;
     average: Integer;
@@ -145,122 +151,122 @@ end computer_letter_grade;
 
 procedure make_records(programs: out program_grades; quizzes: out quiz_grades; tests: out test_grades; exams: out exam_grades) is
 begin
-get(programs.num_grades);
-get(programs.percent_total);
-get(quizzes.num_grades);
-get(quizzes.percent_total);
-get(tests.num_grades);
-get(tests.percent_total);
-get(exams.num_grades);
-get(exams.percent_total);
-skip_line;
+    get(programs.num_grades);
+    get(programs.percent_total);
+    get(quizzes.num_grades);
+    get(quizzes.percent_total);
+    get(tests.num_grades);
+    get(tests.percent_total);
+    get(exams.num_grades);
+    get(exams.percent_total);
+    skip_line;
 end make_records;
 
 procedure get_program_grades(s: in out student)  is
-tempNum: Integer;
-counter: Integer := 1;
+    tempNum: Integer;
+    counter: Integer := 1;
 begin
-while not end_of_line loop
-    get(tempNum);
-    s.pgrades.grades_array(counter) := tempNum;
-    counter := counter + 1;
-end loop;
+    while not end_of_line loop
+        get(tempNum);
+        s.pgrades.grades_array(counter) := tempNum;
+        counter := counter + 1;
+    end loop;
 end get_program_grades;
 
 procedure get_quiz_grades(s: in out student) is
-tempNum: Integer;
-counter: Integer := 1;
+    tempNum: Integer;
+    counter: Integer := 1;
 begin
-while not end_of_line loop
-    get(tempNum);
-    s.qgrades.grades_array(counter) := tempNum;
-    counter := counter + 1;
-end loop;
+    while not end_of_line loop
+        get(tempNum);
+        s.qgrades.grades_array(counter) := tempNum;
+        counter := counter + 1;
+    end loop;
 end get_quiz_grades;
 
 procedure get_test_grades(s: in out student) is
-tempNum: Integer;
-counter: Integer := 1;
+    tempNum: Integer;
+    counter: Integer := 1;
 begin
-while not end_of_line loop
-    get(tempNum);
-    s.tgrades.grades_array(counter) := tempNum;
-    counter := counter + 1;
-end loop;
+    while not end_of_line loop
+        get(tempNum);
+        s.tgrades.grades_array(counter) := tempNum;
+        counter := counter + 1;
+    end loop;
 end get_test_grades;
 
 procedure get_exam_grades(s: in out student) is
-tempNum: Integer;
+    tempNum: Integer;
 begin
-get(tempNum);
-s.egrades.exam_grade:= tempNum;
+    get(tempNum);
+    s.egrades.exam_grade:= tempNum;
 end get_exam_grades;
 
 procedure make_students(stu_array: in out student_array; programs: program_grades; quizzes: quiz_grades; tests: test_grades; exams: exam_grades; stu_count: out Integer) is
-temp: student;
-stu_array_index: Natural:=1;
+    temp: student;
+    stu_array_index: Natural:=1;
 begin
-stu_count := 0;
-while not end_of_file loop
-get_line(temp.name, temp.letters_in_name);
-temp.pgrades:= programs;
-get_program_grades(temp);
-skip_line;
-temp.qgrades := quizzes;
-get_quiz_grades(temp);
-skip_line;
-temp.tgrades:= tests;
-get_test_grades(temp);
-skip_line;
-temp.egrades:= exams;
-get_exam_grades(temp);
-if not end_of_file then
-skip_line;
-end if;
-temp.paverage := compute_program_average(temp);
-temp.qaverage := compute_quiz_average(temp);
-temp.eaverage := temp.egrades.exam_grade;
-fill_in_missing_test_grade(temp);
-temp.taverage := compute_test_average(temp);
-temp.ppoints := compute_program_points(temp);
-temp.qpoints := compute_quiz_points(temp);
-temp.tpoints := compute_test_points(temp);
-temp.epoints := compute_exam_points(temp);
-temp.overall_average := compute_overall_average(temp);
-temp.letter_grade := computer_letter_grade(temp);
-stu_array(stu_array_index) := temp;
-stu_array_index := stu_array_index + 1;
-stu_count := stu_count + 1;
-end loop;
-end make_students;
+    stu_count := 0;
+    while not end_of_file loop
+    get_line(temp.name, temp.letters_in_name);
+    temp.pgrades:= programs;
+    get_program_grades(temp);
+    skip_line;
+    temp.qgrades := quizzes;
+    get_quiz_grades(temp);
+    skip_line;
+    temp.tgrades:= tests;
+    get_test_grades(temp);
+    skip_line;
+    temp.egrades:= exams;
+    get_exam_grades(temp);
+    if not end_of_file then
+        skip_line;
+    end if;
+    temp.paverage := compute_program_average(temp);
+    temp.qaverage := compute_quiz_average(temp);
+    temp.eaverage := temp.egrades.exam_grade;
+    fill_in_missing_test_grade(temp);
+    temp.taverage := compute_test_average(temp);
+    temp.ppoints := compute_program_points(temp);
+    temp.qpoints := compute_quiz_points(temp);
+    temp.tpoints := compute_test_points(temp);
+    temp.epoints := compute_exam_points(temp);
+    temp.overall_average := compute_overall_average(temp);
+    temp.letter_grade := computer_letter_grade(temp);
+    stu_array(stu_array_index) := temp;
+    stu_array_index := stu_array_index + 1;
+    stu_count := stu_count + 1;
+    end loop;
+    end make_students;
 
 procedure print(s: student_array; stu_count: Integer) is
 begin
-for i in 1..stu_count loop
-    put_line("Name: " & s(i).name(1..s(i).letters_in_name));
-    put_line("Overall Average: " & s(i).overall_average'img);
-    put_line("Letter Grade: " & s(i).letter_grade);
-    put_line("Category          Weight  Average  Points   Grades ...");
-    put("Programs           " & s(i).pgrades.percent_total'img &"      " & s(i).paverage'img &"     " & s(i).ppoints'img & "    ");
-    for j in 1..s(i).pgrades.num_grades loop
-        put(s(i).pgrades.grades_array(j)'img);
+    for i in 1..stu_count loop
+        put_line("Name: " & s(i).name(1..s(i).letters_in_name));
+        put_line("Overall Average: " & s(i).overall_average'img);
+        put_line("Letter Grade: " & s(i).letter_grade);
+        put_line("Category          Weight  Average  Points   Grades ...");
+        put("Programs           " & s(i).pgrades.percent_total'img &"      " & s(i).paverage'img &"     " & s(i).ppoints'img & "    ");
+        for j in 1..s(i).pgrades.num_grades loop
+            put(s(i).pgrades.grades_array(j)'img);
+        end loop;
+        new_line;
+        put("Quizzes            " & s(i).qgrades.percent_total'img &"      " & s(i).qaverage'img &"     " & s(i).qpoints'img & "    ");
+        for j in 1..s(i).qgrades.num_grades loop
+            put(s(i).qgrades.grades_array(j)'img);
+        end loop;
+        new_line;
+        put("Tests              " & s(i).tgrades.percent_total'img &"      " & s(i).taverage'img &"     " & s(i).tpoints'img & "    ");
+        for j in 1..s(i).tgrades.num_grades loop
+            put(s(i).tgrades.grades_array(j)'img);
+        end loop;
+        new_line;
+        put("Final Exam         " & s(i).egrades.percent_total'img &"      " & s(i).eaverage'img &"     " & s(i).epoints'img & "    ");
+        put(s(i).egrades.exam_grade'img);
+        new_line;
+        new_line;
     end loop;
-    new_line;
-    put("Quizzes            " & s(i).qgrades.percent_total'img &"      " & s(i).qaverage'img &"     " & s(i).qpoints'img & "    ");
-    for j in 1..s(i).qgrades.num_grades loop
-        put(s(i).qgrades.grades_array(j)'img);
-    end loop;
-    new_line;
-    put("Tests              " & s(i).tgrades.percent_total'img &"      " & s(i).taverage'img &"     " & s(i).tpoints'img & "    ");
-    for j in 1..s(i).tgrades.num_grades loop
-        put(s(i).tgrades.grades_array(j)'img);
-    end loop;
-    new_line;
-    put("Final Exam         " & s(i).egrades.percent_total'img &"      " & s(i).eaverage'img &"     " & s(i).epoints'img & "    ");
-    put(s(i).egrades.exam_grade'img);
-    new_line;
-    new_line;
-end loop;
 end print;
 
 procedure insertion_sort(s: in out student_array; stu_count: Integer) is
