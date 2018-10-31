@@ -5,7 +5,7 @@ with Ada.Float_Text_IO; use Ada.Float_Text_IO;
 procedure missing_scores is
 zero: constant Integer:= 0;
 missing_grade: constant Integer := 101;
-
+type let_grade is (A,B,C,D,F);
 subtype grade is Natural range 0..101;
 type grades is array( 1..77 ) of grade;
 
@@ -49,7 +49,7 @@ type student is record
     epoints: Integer;
     eaverage: Integer;
     overall_average: Integer;
-    letter_grade: Character;
+    letter_grade: let_grade;
 end record;
 
 type student_array is array( 1..100 ) of student;
@@ -145,19 +145,19 @@ procedure fill_in_missing_test_grade(s: in out student) is
 end fill_in_missing_test_grade;
 
 
-function computer_letter_grade (s: student) return Character is
-    grade: Character;
+function computer_letter_grade (s: student) return let_grade is
+    grade: let_grade;
     begin
     if s.overall_average >= 90 then
-        grade := 'A';
+        grade := A;
     elsif s.overall_average >= 80 then
-        grade := 'B';
+        grade := B;
     elsif s.overall_average >= 70 then
-        grade := 'C';
+        grade := C;
     elsif s.overall_average >= 60 then
-        grade := 'D';
+        grade := D;
     else
-        grade := 'F';
+        grade := F;
     end if;
     return grade;
 end computer_letter_grade;
@@ -265,7 +265,7 @@ begin
     for i in 1..stu_count loop
         put_line("Name: " & s(i).name(1..s(i).letters_in_name));
         put_line("Overall Average: " & s(i).overall_average'img);
-        put_line("Letter Grade: " & s(i).letter_grade);
+        put_line("Letter Grade: " & s(i).letter_grade'img);
         put_line("Category          Weight  Average  Points   Grades ...");
         put("Programs           " & s(i).pgrades.percent_total'img &"      " & s(i).paverage'img &"     " & s(i).ppoints'img & "    ");
         for j in 1..s(i).pgrades.num_grades loop
